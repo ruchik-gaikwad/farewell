@@ -1,21 +1,107 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-toolbar color = "primary">
+  <span>Letting You Go Is Not Easy</span>
+</mat-toolbar>
 
-<router-outlet></router-outlet>
+
+
+
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Hey Gargi: It all started of Like this ahh</ng-template>
+
+
+        <p>
+            Meeting you was wonderfull. Remember the day i texted you, and the bogus thing  that i came up with friends poking me.
+            And the infamous Pickup line : Auto complete it and might find the answer ? :D !! 
+            The long the talks that we used to have in the night, am really gonna miss it.  
+        </p>
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Oh: The Coffee Night</ng-template>
+        <p>
+          How can i forget that coffee Night, i dont know how i suddenely felt to ask you out on a coffee. But here it is:  I DID ASK YOU OUT THAT NIGHT
+          I think thats were we started bonding. Really i went out of topics that day, and somehow didnt wanted that time to end. And the good part was you were drilling it, 
+          which kept the conversation alive. :D 
+        </p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>The First Night Out</ng-template>
+    <p>
+      Truely confronting, I never even thought or planed for any sort of physical thing, it just happened. And the following day was headache because of the nuisance
+      created by your team mates and the shitty office. 
+    </p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>What you truely Ment to ME</ng-template>
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList>
+        <mat-chip
+          *ngFor="let fruit of  fruits"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(fruit)">
+          {{fruit}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="New fruit..."
+          #fruitInput
+          [formControl]="fruitCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+          {{fruit}}
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-form-field>
+
+    <div *ngIf="autoCompletethis">
+      <p>Try Out other Options Dear</p>
+   </div>
+
+   <div *ngIf = "Love">
+        <img  src="https://i.pinimg.com/originals/19/36/8c/19368c643f122add724d57b9715f5216.jpg" alt="My Dear Love !!">
+        <p>
+          I will cherish each and every moment spent together with you Gargi, I really adore that you decided to walk into my sddist life and for short time thugh 
+          and you made it cheerful. I always wanted someone to go back too, lean and to care for someone. although now ill be going back staring at walls of my 
+          empty echoing room. You stepped in and you filled it with songs and all the colors of your versions. Im gonna miss each every thing, form getting drench in rain
+          or trying to watch KGF (someday will try to complete it :D). Or it may be feeding you with my hands.  
+          <strong>A PART OF ME LOVED YOU DEEPLY !</strong> 
+        </p>
+   </div>
+
+   <div *ngIf = "Random">
+     <p>Nahh!!!</p>
+   </div>
+
+   <div *ngIf = "Hate">
+     <p>Seriously ???</p>
+   </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
